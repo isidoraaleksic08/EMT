@@ -1,4 +1,4 @@
-package com.example.lab1emt.model;
+package com.example.lab1emt.model.domain;
 
 import jakarta.persistence.*;
 import lombok.Data;

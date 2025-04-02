@@ -1,6 +1,6 @@
 package com.example.lab1emt.repository;
 
-import com.example.lab1emt.model.Author;
+import com.example.lab1emt.model.domain.Author;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

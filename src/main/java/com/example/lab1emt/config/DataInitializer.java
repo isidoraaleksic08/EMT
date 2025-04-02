@@ -1,28 +1,31 @@
 package com.example.lab1emt.config;
 
-import com.example.lab1emt.model.Author;
-import com.example.lab1emt.model.Book;
-import com.example.lab1emt.model.Category;
-import com.example.lab1emt.model.Country;
+import com.example.lab1emt.model.domain.*;
+import com.example.lab1emt.model.enumerations.Role;
 import com.example.lab1emt.repository.AuthorRepository;
 import com.example.lab1emt.repository.BookRepository;
 import com.example.lab1emt.repository.CountryRepository;
 import jakarta.annotation.PostConstruct;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-
+import com.example.lab1emt.repository.UserRepository;
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
 public class DataInitializer {
+    private final PasswordEncoder passwordEncoder;
     private final AuthorRepository authorRepository;
     private final BookRepository bookRepository;
     private final CountryRepository countryRepository;
+   private final UserRepository userRepository;
+    public DataInitializer(PasswordEncoder passwordEncoder, AuthorRepository authorRepository, BookRepository bookRepository, CountryRepository countryRepository, UserRepository userRepository) {
+        this.passwordEncoder = passwordEncoder;
 
-    public DataInitializer(AuthorRepository authorRepository, BookRepository bookRepository, CountryRepository countryRepository) {
         this.authorRepository = authorRepository;
         this.bookRepository = bookRepository;
         this.countryRepository = countryRepository;
+        this.userRepository = userRepository;
     }
 
     private final List<Author> authors = new ArrayList<>();
@@ -60,5 +63,21 @@ public class DataInitializer {
         books.add(new Book( "Book3", categories.get(1), author1, 2));
 
         bookRepository.saveAll(books);
+
+        userRepository.save(new User(
+                "at",
+                passwordEncoder.encode("at"),
+                "Ana",
+                "Todorovska",
+                Role.ROLE_Librarian
+        ));
+        userRepository.save(new User(
+                "user",
+                passwordEncoder.encode("user"),
+                "User",
+                "User",
+                Role.ROLE_USER
+        ));
+
     }
 }

@@ -1,4 +1,5 @@
-package com.example.lab1emt.model;
+package com.example.lab1emt.model.domain;
+
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,7 +18,8 @@ public class Book {
     private Author author;
     private Integer availableCopies;
 
-    public Book( String name, Category category, Author author, Integer availableCopies) {
+
+    public Book(String name, Category category, Author author, Integer availableCopies) {
 
         this.name = name;
         this.category = category;
@@ -72,4 +74,6 @@ public class Book {
     public Integer getAvailableCopies() {
         return availableCopies;
     }
+
+
 }

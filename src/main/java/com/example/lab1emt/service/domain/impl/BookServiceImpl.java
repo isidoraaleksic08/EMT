@@ -1,13 +1,12 @@
-package com.example.lab1emt.service.impl;
+package com.example.lab1emt.service.domain.impl;
 
-import com.example.lab1emt.model.Book;
-import com.example.lab1emt.model.Category;
+import com.example.lab1emt.model.domain.Book;
+import com.example.lab1emt.model.domain.Category;
 import com.example.lab1emt.model.exeptions.InvalidAuthorId;
 import com.example.lab1emt.model.exeptions.InvalidBookIdException;
 import com.example.lab1emt.repository.BookRepository;
-import com.example.lab1emt.service.AuthorService;
-import com.example.lab1emt.service.BookService;
-import jakarta.transaction.Transactional;
+import com.example.lab1emt.service.domain.AuthorService;
+import com.example.lab1emt.service.domain.BookService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,9 +23,9 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-
     public List<Book> findAll() {
         return bookRepository.findAll();
+
     }
 
     @Override
@@ -57,6 +56,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public void deleteById(Long id) {
+
         bookRepository.deleteById(id);
     }
 

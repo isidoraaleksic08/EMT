@@ -1,6 +1,7 @@
 package com.example.lab1emt.model.dto;
 
-import com.example.lab1emt.model.Category;
+
+import com.example.lab1emt.model.domain.Category;
 import lombok.Data;
 
 @Data
@@ -10,9 +11,11 @@ public class BookDto {
     Long authorId;
     Integer availableCopies;
 
+
     public String getName() {
         return name;
     }
+
 
     public void setName(String name) {
         this.name = name;

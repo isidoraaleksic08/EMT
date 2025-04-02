@@ -1,11 +1,11 @@
-package com.example.lab1emt.service.impl;
+package com.example.lab1emt.service.domain.impl;
 
-import com.example.lab1emt.model.Author;
+import com.example.lab1emt.model.domain.Author;
 import com.example.lab1emt.model.exeptions.InvalidAuthorId;
 import com.example.lab1emt.model.exeptions.InvalidCountryId;
 import com.example.lab1emt.repository.AuthorRepository;
-import com.example.lab1emt.service.AuthorService;
-import com.example.lab1emt.service.CountryService;
+import com.example.lab1emt.service.domain.AuthorService;
+import com.example.lab1emt.service.domain.CountryService;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;

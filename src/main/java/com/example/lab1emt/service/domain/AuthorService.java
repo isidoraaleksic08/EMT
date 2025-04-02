@@ -1,5 +1,5 @@
-package com.example.lab1emt.service;
-import com.example.lab1emt.model.Author;
+package com.example.lab1emt.service.domain;
+import com.example.lab1emt.model.domain.Author;
 
 import java.util.List;
 import java.util.Optional;

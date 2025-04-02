@@ -1,9 +1,9 @@
-package com.example.lab1emt.service.impl;
+package com.example.lab1emt.service.domain.impl;
 
-import com.example.lab1emt.model.Country;
+import com.example.lab1emt.model.domain.Country;
 import com.example.lab1emt.model.exeptions.InvalidCountryId;
 import com.example.lab1emt.repository.CountryRepository;
-import com.example.lab1emt.service.CountryService;
+import com.example.lab1emt.service.domain.CountryService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

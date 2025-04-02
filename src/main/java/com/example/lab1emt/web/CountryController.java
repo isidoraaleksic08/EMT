@@ -1,9 +1,15 @@
 package com.example.lab1emt.web;
 
 
-import com.example.lab1emt.model.Country;
+import com.example.lab1emt.dto.CreateCountryDto;
+import com.example.lab1emt.dto.DisplayCountryDto;
+import com.example.lab1emt.dto.UpdateCountryDto;
+import com.example.lab1emt.model.domain.Country;
 import com.example.lab1emt.model.dto.CountryDto;
-import com.example.lab1emt.service.CountryService;
+import com.example.lab1emt.service.application.CountryAplicationService;
+import com.example.lab1emt.service.domain.CountryService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,47 +17,58 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/country")
+@Tag(name = "Country API", description = "Endpoints for managing counties") // OpenAPI tag
+
 public class CountryController {
-    private final CountryService countryService;
+    private final CountryAplicationService countryAplicationService;
 
-    public CountryController(CountryService countryService) {
-        this.countryService = countryService;
+    public CountryController( CountryAplicationService countryAplicationService) {
+        this.countryAplicationService = countryAplicationService;
+
     }
 
 
+    @Operation(summary = "Get all counties", description = "Retrieves a list of all available counties.")
     @GetMapping
-    public List<Country> findAll() {
-        return countryService.findAll();
+    public List<DisplayCountryDto> findAll() {
+        return countryAplicationService.getAllCounties();
     }
 
 
+    @Operation(summary = "Get country by ID", description = "Finds a country by its ID.")
     @GetMapping("/{id}")
-    public ResponseEntity<Country> findById(@PathVariable Long id) {
-        return countryService.findById(id)
-                .map(c -> ResponseEntity.ok().body(c))
+    public ResponseEntity<DisplayCountryDto> findById(@PathVariable Long id) {
+        return countryAplicationService.getCountryId(id)
+                .map(category -> ResponseEntity.ok().body(category))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    @Operation(summary = "Add a new country", description = "Creates a new country.")
     @PostMapping("/add")
-    public ResponseEntity<Country> create(@RequestBody CountryDto countryDto) {
-        return countryService.create(countryDto.getName(), countryDto.getContinent())
-                .map(country -> ResponseEntity.ok().body(country))
+    public ResponseEntity<DisplayCountryDto> create(@RequestBody CreateCountryDto createCountryDto) {
+        return countryAplicationService.createCountry(createCountryDto)
+                .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    @Operation(summary = "Delete a country", description = "Deletes a country by its ID.")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteById(@PathVariable Long id) {
-        if (countryService.findById(id).isPresent()) {
-            countryService.deleteById(id);
+        if (countryAplicationService.getCountryId(id).isPresent()) {
+            countryAplicationService.deleteById(id);
             return ResponseEntity.noContent().build();
         } else {
             return ResponseEntity.notFound().build();
         }
     }
-    @PostMapping("/edit/{id}")
-    public ResponseEntity<Country>update(@PathVariable Long id, @RequestBody CountryDto countryDto){
-        return countryService.update(id, countryDto.getName(), countryDto.getContinent())
-                .map(country -> ResponseEntity.ok().body(country))
+    @Operation(summary = "Update an existing country", description = "Updates a county by ID.")
+    @PutMapping("/edit/{id}")
+    public ResponseEntity<DisplayCountryDto> update(
+            @PathVariable Long id,
+            @RequestBody UpdateCountryDto updateCountryDto
+    ) {
+        return countryAplicationService.updateCountry(id, updateCountryDto)
+                .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 }

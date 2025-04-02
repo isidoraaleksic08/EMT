@@ -1,7 +1,7 @@
-package com.example.lab1emt.service;
+package com.example.lab1emt.service.domain;
 
-import com.example.lab1emt.model.Book;
-import com.example.lab1emt.model.Category;
+import com.example.lab1emt.model.domain.Book;
+import com.example.lab1emt.model.domain.Category;
 
 import java.util.List;
 import java.util.Optional;

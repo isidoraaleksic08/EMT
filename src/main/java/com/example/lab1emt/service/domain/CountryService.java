@@ -1,5 +1,5 @@
-package com.example.lab1emt.service;
-import com.example.lab1emt.model.Country;
+package com.example.lab1emt.service.domain;
+import com.example.lab1emt.model.domain.Country;
 
 import java.util.List;
 import java.util.Optional;
