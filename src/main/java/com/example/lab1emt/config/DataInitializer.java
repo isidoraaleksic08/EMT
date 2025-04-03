@@ -9,6 +9,9 @@ import jakarta.annotation.PostConstruct;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import com.example.lab1emt.repository.UserRepository;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,9 +61,17 @@ public class DataInitializer {
         authorRepository.saveAll(authors);
 
 
-        books.add(new Book( "Book1", categories.get(2), author2, 3));
-        books.add(new Book( "Book2", categories.get(3), author3, 6));
-        books.add(new Book( "Book3", categories.get(1), author1, 2));
+        books.add(new Book( "Book1", categories.get(2), author2, 3, LocalDateTime.of(2024,5,8,5,15)));
+        books.add(new Book( "Book2", categories.get(3), author3, 6,LocalDateTime.of(2024,3,2,4,12)));
+        books.add(new Book( "Book3", categories.get(1), author1, 2,LocalDateTime.of(2025,3,4,1,23)));
+        books.add(new Book( "Book4", categories.get(1), author1, 2,LocalDateTime.of(2025,3,4,1,23)));
+        books.add(new Book( "Book5", categories.get(1), author1, 2,LocalDateTime.of(2025,3,4,1,23)));
+        books.add(new Book( "Book6", categories.get(1), author1, 2,LocalDateTime.of(2025,3,4,1,23)));
+        books.add(new Book( "Book7", categories.get(1), author1, 2,LocalDateTime.of(2025,3,4,1,23)));
+        books.add(new Book( "Book8", categories.get(1), author1, 2,LocalDateTime.of(2025,3,4,1,23)));
+        books.add(new Book( "Book9", categories.get(1), author1, 2,LocalDateTime.of(2025,3,4,1,23)));
+        books.add(new Book( "Book10", categories.get(1), author1, 2,LocalDateTime.of(2025,3,4,1,23)));
+        books.add(new Book( "Book11", categories.get(1), author1, 2,LocalDateTime.of(2025,3,4,1,23)));
 
         bookRepository.saveAll(books);
 

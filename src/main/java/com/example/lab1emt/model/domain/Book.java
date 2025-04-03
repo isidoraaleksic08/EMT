@@ -3,6 +3,10 @@ package com.example.lab1emt.model.domain;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.time.LocalDateTime;
+import java.util.Date;
 
 @Data
 @Entity
@@ -17,14 +21,15 @@ public class Book {
     @ManyToOne
     private Author author;
     private Integer availableCopies;
+    public LocalDateTime date;
 
-
-    public Book(String name, Category category, Author author, Integer availableCopies) {
+    public Book(String name, Category category, Author author, Integer availableCopies, LocalDateTime date) {
 
         this.name = name;
         this.category = category;
         this.author = author;
         this.availableCopies = availableCopies;
+        this.date=date;
     }
     public Book(){
 
@@ -57,6 +62,14 @@ public class Book {
 
     public Long getId() {
         return id;
+    }
+
+    public LocalDateTime getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDateTime date) {
+        this.date = date;
     }
 
     public String getName() {

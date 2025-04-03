@@ -47,7 +47,7 @@ public class BookApplicationServiceImpl implements BookAplicationService {
         }
 
 
-        return bookService.create(createBookDto.name(), createBookDto.category(), createBookDto.authorId(), createBookDto.availableCopies())
+        return bookService.create(createBookDto.name(), createBookDto.category(), createBookDto.authorId(), createBookDto.availableCopies(), createBookDto.date())
                 .map(DisplayBookDto::from);
     }
 
@@ -78,5 +78,8 @@ public class BookApplicationServiceImpl implements BookAplicationService {
     @Override
     public void deletById(Long id) {
          bookService.deleteById(id);
+    }
+    public List<Book> getLatestBooks() {
+        return bookService.getLatestBooks();
     }
 }

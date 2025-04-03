@@ -76,4 +76,10 @@ public class BookController {
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
+    @Operation(summary = "List 10 books", description = "List the newest 10 books")
+
+    @GetMapping("/latest")
+    public List<Book> getLatestBooks() {
+        return bookAplicationService.getLatestBooks();
+    }
 }

@@ -9,6 +9,7 @@ import com.example.lab1emt.service.domain.AuthorService;
 import com.example.lab1emt.service.domain.BookService;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,11 +29,12 @@ public class BookServiceImpl implements BookService {
 
     }
 
+
     @Override
 
-    public Optional<Book> create(String name, Category category, Long authorId, Integer availableCopies) {
+    public Optional<Book> create(String name, Category category, Long authorId, Integer availableCopies, LocalDateTime date) {
         return this.authorService.findById(authorId).map(author -> {
-            Book book = new Book(name, category, author, availableCopies);
+            Book book = new Book(name, category, author, availableCopies, date);
             return Optional.of(this.bookRepository.save(book));
         }).orElse(Optional.empty());
     }
@@ -66,6 +68,9 @@ public class BookServiceImpl implements BookService {
             book.markAsRented();
             return bookRepository.save(book);
         });
+    }
+    public List<Book> getLatestBooks() {
+        return bookRepository.findTop10ByOrderByDateDesc();
     }
 
 }
