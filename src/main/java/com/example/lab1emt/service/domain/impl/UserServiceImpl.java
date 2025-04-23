@@ -2,11 +2,7 @@ package com.example.lab1emt.service.domain.impl;
 
 import com.example.lab1emt.model.domain.User;
 import com.example.lab1emt.model.enumerations.Role;
-import com.example.lab1emt.model.exeptions.InvalidArgumentsException;
-import com.example.lab1emt.model.exeptions.InvalidUsernameOrPasswordException;
-import com.example.lab1emt.model.exeptions.InvalidUserCredentialsException;
-import com.example.lab1emt.model.exeptions.PasswordsDoNotMatchException;
-import com.example.lab1emt.model.exeptions.UsernameAlreadyExistsException;
+import com.example.lab1emt.model.exeptions.*;
 import com.example.lab1emt.repository.UserRepository;
 import com.example.lab1emt.service.domain.UserService;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -57,10 +53,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User login(String username, String password) {
-        if (username == null || username.isEmpty() || password == null || password.isEmpty()) {
+        if (username == null || username.isEmpty() || password == null || password.isEmpty())
             throw new InvalidArgumentsException();
-        }
-        return userRepository.findByUsernameAndPassword(username, password).orElseThrow(
-                InvalidUserCredentialsException::new);
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UserNotFoundException(username));
+        if (!passwordEncoder.matches(password, user.getPassword()))
+            throw new InvalidUserCredentialsException();
+        return user;
     }
+
 }

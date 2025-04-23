@@ -1,9 +1,6 @@
 package com.example.lab1emt.service.application;
 
-import com.example.lab1emt.dto.CreateBookDto;
-import com.example.lab1emt.dto.DisplayAuthorDto;
-import com.example.lab1emt.dto.DisplayBookDto;
-import com.example.lab1emt.dto.UpdateBookDto;
+import com.example.lab1emt.dto.*;
 import com.example.lab1emt.model.domain.Book;
 
 import java.util.List;
@@ -17,4 +14,7 @@ public interface BookAplicationService {
     Optional <DisplayBookDto> markBook(Long id);
     void deletById(Long id);
     List<Book> getLatestBooks();
+
+    List<BooksByAuthorView> getBooksByAuthor();
+
 }

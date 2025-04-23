@@ -1,11 +1,12 @@
 package com.example.lab1emt.model.domain;
+import com.example.lab1emt.listeners.AuthorEntityListener;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-
+@EntityListeners(AuthorEntityListener.class)
 public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -16,6 +16,20 @@ import java.util.List;
 
 @Data
 @Entity
+@NamedEntityGraph(
+        name = "User.withoutWishlists",
+        attributeNodes = {
+                @NamedAttributeNode("username"),
+                @NamedAttributeNode("password"),
+                @NamedAttributeNode("name"),
+                @NamedAttributeNode("surname"),
+                @NamedAttributeNode("role"),
+                @NamedAttributeNode("isAccountNonExpired"),
+                @NamedAttributeNode("isAccountNonLocked"),
+                @NamedAttributeNode("isCredentialsNonExpired"),
+                @NamedAttributeNode("isEnabled")
+        }
+)
 @Table(name = "users")
 public class User implements UserDetails {
 
@@ -42,7 +56,7 @@ public class User implements UserDetails {
     // to-one -> FetchType.EAGER
     // to-many -> FetchType.LAZY
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
     private List<Wishlist> wishlists;
 
     public User() {

@@ -1,5 +1,6 @@
 package com.example.lab1emt.web;
 
+import com.example.lab1emt.dto.BooksByAuthorView;
 import com.example.lab1emt.dto.CreateBookDto;
 import com.example.lab1emt.dto.DisplayBookDto;
 import com.example.lab1emt.dto.UpdateBookDto;
@@ -66,6 +67,11 @@ public class BookController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+    @GetMapping("/by-author")
+    @Operation(summary = "Get number of books by author", description = "Retrieves the number of books per author from the materialized view.")
+    public List<BooksByAuthorView> getBooksByAuthor() {
+        return bookAplicationService.getBooksByAuthor();
     }
     @Operation(summary = "Mark book as rented", description = "Marks a book as rented by its ID.")
     @PutMapping("/{id}/mark-rented")

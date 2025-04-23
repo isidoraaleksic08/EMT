@@ -6,6 +6,7 @@ import com.example.lab1emt.model.projection.UserProjection;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -18,9 +19,11 @@ public interface UserRepository extends JpaRepository<User, String> {
 
     Optional<User> findByUsername(String username);
 
+    @EntityGraph(value = "User.withoutWishlists", type = EntityGraph.EntityGraphType.LOAD)
     List<User> findAll();
 
-    List<UserProjection> findAllByRole(Role role);
+    @Query("SELECT u.username AS username, u.name AS name, u.surname AS surname FROM User u WHERE u.role = :role")
+    List<UserProjection> findAllByRole(@Param("role") Role role);
 
     @Query("SELECT u FROM User u")
     List<UserProjection> findAllProjected();

@@ -40,26 +40,26 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
-                .cors(httpSecurityCorsConfigurer -> httpSecurityCorsConfigurer.configurationSource(corsConfigurationSource()))
-                .authorizeHttpRequests(requests -> requests
-                        .requestMatchers("/api/author/**", "/api/book/**", "/api/categories/**", "/api/user/login", "/api/user/register", "/api/country/**")
-                        .permitAll()
-                        .requestMatchers("/api/wishlist/**")
-                        .hasRole("USER")
-                        .anyRequest().authenticated())
-                .formLogin(form -> form
-                        .loginProcessingUrl("/api/user/login")
-                        .permitAll()
-                        .failureUrl("/api/user/login?error=BadCredentials")
-                        .defaultSuccessUrl("/swagger-ui/index.html", true))
-                .logout(logout -> logout
-                        .logoutUrl("/api/user/logout")  // URL за излогирање
-                        .clearAuthentication(true)
-                        .invalidateHttpSession(true)
-                        .deleteCookies("JSESSIONID")
-                        .logoutSuccessUrl("/api/user/login"))
-                .exceptionHandling(ex -> ex
-                        .accessDeniedPage("/access_denied"));
+                .cors(httpSecurityCorsConfigurer -> httpSecurityCorsConfigurer.configurationSource(corsConfigurationSource()));
+//                .authorizeHttpRequests(requests -> requests
+//                        .requestMatchers("/api/author/**", "/api/book/**", "/api/categories/**", "/api/user/login", "/api/user/register", "/api/country/**")
+//                        .permitAll()
+//                        .requestMatchers("/api/wishlist/**")
+//                        .hasRole("USER")
+//                        .anyRequest().authenticated())
+//                .formLogin(form -> form
+//                        .loginProcessingUrl("/api/user/login")
+//                        .permitAll()
+//                        .failureUrl("/api/user/login?error=BadCredentials")
+//                        .defaultSuccessUrl("/swagger-ui/index.html", true))
+//                .logout(logout -> logout
+//                        .logoutUrl("/api/user/logout")  // URL за излогирање
+//                        .clearAuthentication(true)
+//                        .invalidateHttpSession(true)
+//                        .deleteCookies("JSESSIONID")
+//                        .logoutSuccessUrl("/api/user/login"))
+//                .exceptionHandling(ex -> ex
+//                        .accessDeniedPage("/access_denied"));
 
         return http.build();
     }

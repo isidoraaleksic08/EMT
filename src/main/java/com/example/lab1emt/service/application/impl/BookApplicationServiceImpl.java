@@ -1,12 +1,9 @@
 package com.example.lab1emt.service.application.impl;
 
-import com.example.lab1emt.dto.CreateBookDto;
-import com.example.lab1emt.dto.DisplayAuthorDto;
-import com.example.lab1emt.dto.DisplayBookDto;
-import com.example.lab1emt.dto.UpdateBookDto;
+import com.example.lab1emt.dto.*;
 import com.example.lab1emt.model.domain.Author;
 import com.example.lab1emt.model.domain.Book;
-import com.example.lab1emt.model.domain.Category;
+import com.example.lab1emt.repository.BookRepository;
 import com.example.lab1emt.service.application.BookAplicationService;
 import com.example.lab1emt.service.domain.AuthorService;
 import com.example.lab1emt.service.domain.BookService;
@@ -19,11 +16,13 @@ import java.util.stream.Collectors;
 @Service
 public class BookApplicationServiceImpl implements BookAplicationService {
     private final BookService bookService;
+    private final BookRepository bookRepository;
     private final AuthorService authorService;
 
 
-    public BookApplicationServiceImpl(BookService bookService, AuthorService authorService) {
+    public BookApplicationServiceImpl(BookService bookService, BookRepository bookRepository, AuthorService authorService) {
         this.bookService = bookService;
+        this.bookRepository = bookRepository;
         this.authorService = authorService;
     }
 
@@ -31,6 +30,9 @@ public class BookApplicationServiceImpl implements BookAplicationService {
     public List<DisplayBookDto> getAllBooks() {
         return bookService.findAll().stream().map(DisplayBookDto::from).collect(Collectors.toList());
 
+    }
+    public List<BooksByAuthorView> getBooksByAuthor() {
+        return bookRepository.getBooksByAuthor();
     }
 
     @Override
