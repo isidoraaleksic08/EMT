@@ -15,6 +15,8 @@ public class AuthorEntityListener {
     @PostUpdate
     @PostRemove
     public void refreshView(Object o) {
+
+
         if (jdbcTemplate != null) {
             jdbcTemplate.execute("REFRESH MATERIALIZED VIEW authors_by_country_view");
         }

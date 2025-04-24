@@ -10,3 +10,5 @@ REFRESH MATERIALIZED VIEW authors_by_country_view;
 SELECT * FROM authors_by_country_view;
 
 
+
+

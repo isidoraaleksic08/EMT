@@ -29,6 +29,7 @@ public class AuthorServiceImpl implements AuthorService {
     @Override
     public Optional<Author> create(String name, String surname, Long countryId) {
         return Optional.of(authorRepository.save(new Author(name, surname, countryService.findById(countryId).orElseThrow(InvalidCountryId::new))));
+
     }
 
     @Override

@@ -52,9 +52,6 @@ public class User implements UserDetails {
     @Enumerated(value = EnumType.STRING)
     private Role role;
 
-    // default:
-    // to-one -> FetchType.EAGER
-    // to-many -> FetchType.LAZY
 
     @OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
     private List<Wishlist> wishlists;

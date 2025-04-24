@@ -9,23 +9,19 @@ public class ScheduledTask {
 
     private final MaterializedViewRefresherInterface materializedViewRefresher;
 
-    // Инјектирање на зависноста
     public ScheduledTask(MaterializedViewRefresherInterface materializedViewRefresher) {
         this.materializedViewRefresher = materializedViewRefresher;
     }
 
-    // Оваа задача ќе се извршува на секој час
-    @Scheduled(cron = "0 0 * * * *")  // Закажано да се извршува на секој час
+    @Scheduled(cron = "0 0 * * * *")
     public void refreshMaterializedView() {
-        // Повик на методот кој го освежува materialized view
         materializedViewRefresher.refreshBooksByAuthorView();
         System.out.println("Materialized view 'books_by_author' е успешно освежен.");
     }
 
-    // Ако имате друга задача за секој ден
-    @Scheduled(cron = "0 0 0 * * *")  // Оваа задача ќе се извршува на секој ден на полноќ
+
+    @Scheduled(cron = "0 0 0 * * *")
     public void anotherScheduledTask() {
-        // Некои други операции
         System.out.println("Извршувам дневна задача.");
     }
 }

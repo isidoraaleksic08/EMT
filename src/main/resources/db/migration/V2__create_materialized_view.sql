@@ -6,4 +6,8 @@ GROUP BY a.id;
 
 
 CREATE UNIQUE INDEX idx_books_by_author ON books_by_author(author_id);
-DROP MATERIALIZED VIEW IF EXISTS books_by_author;
+
+
+REFRESH MATERIALIZED VIEW books_by_author;
+
+select * from books_by_author

@@ -7,7 +7,6 @@ public class BooksByAuthorView {
     private String surname;
     private Long bookCount;
 
-    // Конструктор
     public BooksByAuthorView(Long authorId, String name, String surname, Long bookCount) {
         this.authorId = authorId;
         this.name = name;
@@ -15,7 +14,6 @@ public class BooksByAuthorView {
         this.bookCount = bookCount;
     }
 
-    // Гетери
     public Long getAuthorId() {
         return authorId;
     }
